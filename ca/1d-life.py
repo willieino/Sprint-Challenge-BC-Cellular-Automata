@@ -4,7 +4,31 @@ def get_new_value(old_gen, old_automata):
     # TBC - add code to generate the next row of cells,
     # then replace the return statement below to
     # return the updated automata
-    return old_automata
+    #x = []
+    new_automata = [0] * (SQ_NUM*SQ_NUM)
+   
+    #x = list(old_automata)
+    index = 1
+    while index < (len(old_automata) - 1):
+        accum = 0
+        if old_automata[index - 1] == 1:
+            accum +=1
+            #x[index] = 1
+        if old_automata[index] == 1:
+            accum +=1
+            #x[index] = 1
+            #do nothing
+        if old_automata[index + 1] == 1:
+            accum +=1
+            #x[index] = 1
+        #else:
+            #x[index] = 0
+        if accum > 0 and accum < 3:
+            new_automata[index] = 1
+        else:
+            new_automata[index] = 0
+        index += 1
+    return new_automata
 
 # Define some colors and other constants
 BLACK = (0, 0, 0)

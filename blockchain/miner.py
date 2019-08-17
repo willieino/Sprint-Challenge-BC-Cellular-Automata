@@ -45,14 +45,16 @@ def valid_proof(last_hash, proof):
 
     IE:  last_hash: ...999123456, new hash 123456888...
     """
-    x = str(last_hash)
+    x = last_hash
+    #x = str(last_hash)
     # TODO: Your code here!
     guess = f'{x}'.encode()
-    #guess = f'{last_proof}{proof}'.encode()
+    #guess = f'{x}{proof}'.encode()
     
     # use hash function
     guess_hash = hashlib.sha256(guess).hexdigest()
-    y = str(proof)
+    #y = str(proof)
+    y = proof
     guess2 = f'{y}'.encode()
     guess_hash2 = hashlib.sha256(guess2).hexdigest()
     # check if 6 leading 0's in hash result
