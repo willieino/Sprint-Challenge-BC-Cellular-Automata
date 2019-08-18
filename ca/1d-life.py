@@ -8,17 +8,19 @@ def get_new_value(old_gen, old_automata):
     new_automata = [0] * (SQ_NUM*SQ_NUM)
    
     #x = list(old_automata)
-    index = 1
-    while index < (len(old_automata) - 1):
+    index = 0
+   
+    #while index < (len(old_automata) - 1):
+    while index < ((SQ_NUM*SQ_NUM) - 1):
         accum = 0
-        if old_automata[index - 1] == 1:
+        if index > 0 and old_automata[index - 1] == 1:
             accum +=1
             #x[index] = 1
         if old_automata[index] == 1:
             accum +=1
             #x[index] = 1
             #do nothing
-        if old_automata[index + 1] == 1:
+        if index < (len(old_automata) - 1) and  old_automata[index + 1] == 1:
             accum +=1
             #x[index] = 1
         #else:
@@ -98,7 +100,7 @@ while not done:
  
     # --- Game logic should go here
     if running:
-        if generations < SQ_NUM:
+        if generations < (SQ_NUM*SQ_NUM):
             generations += 1
             automata = get_new_value(generations-1, automata)
             
