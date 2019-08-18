@@ -5,31 +5,21 @@ def get_new_value(old_gen, old_automata):
     # then replace the return statement below to
     # return the updated automata
     #x = []
-    new_automata = [0] * (SQ_NUM*SQ_NUM)
-   
-    #x = list(old_automata)
+    new_automata = [0] * (SQ_NUM*SQ_NUM)   
     index = 0
    
-    #while index < (len(old_automata) - 1):
-    while index < ((SQ_NUM*SQ_NUM) - 1):
+    for index in range(0, SQ_NUM):
         accum = 0
         if index > 0 and old_automata[index - 1] == 1:
             accum +=1
-            #x[index] = 1
         if old_automata[index] == 1:
             accum +=1
-            #x[index] = 1
-            #do nothing
         if index < (len(old_automata) - 1) and  old_automata[index + 1] == 1:
             accum +=1
-            #x[index] = 1
-        #else:
-            #x[index] = 0
         if accum > 0 and accum < 3:
             new_automata[index] = 1
         else:
             new_automata[index] = 0
-        index += 1
     return new_automata
 
 # Define some colors and other constants

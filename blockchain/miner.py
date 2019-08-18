@@ -26,11 +26,6 @@ def proof_of_work(last_proof):
     proof = 0
     #  TODO: Your code here
     while valid_proof(last_proof, proof) is False:
-        #guess = f'{last_proof}'.encode()
-        #guess = f'{last_proof}{proof}'.encode()
-    
-        # use hash function
-        #guess_hash = hashlib.sha256(guess).hexdigest()
         proof += 1
         
     
@@ -46,27 +41,22 @@ def valid_proof(last_hash, proof):
     IE:  last_hash: ...999123456, new hash 123456888...
     """
     x = last_hash
-    #x = str(last_hash)
+   
     # TODO: Your code here!
     guess = f'{x}'.encode()
-    #guess = f'{x}{proof}'.encode()
-    
+   
     # use hash function
     guess_hash = hashlib.sha256(guess).hexdigest()
-    #y = str(proof)
+    
     y = proof
     guess2 = f'{y}'.encode()
     guess_hash2 = hashlib.sha256(guess2).hexdigest()
-    # check if 6 leading 0's in hash result
-    #temp = str(last_hash) #p = last_hash.copy()
-    #p = str(last_hash).slice(len(str(last_hash)), -2)
-    #x = slice(-2)
-    #p = temp[len(temp)-2:2]
-    z = len(guess_hash2) 
-    p = guess_hash2[z-6:z]
-    #print(p)
-    p2 = guess_hash[0:6]
-    #print(p2)       
+   
+    z = len(guess_hash) 
+    p = guess_hash[z-6:z]
+  
+    p2 = guess_hash2[0:6]
+        
     if p == p2:
         return True
     else:
