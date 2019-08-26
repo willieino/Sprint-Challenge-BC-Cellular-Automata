@@ -4,23 +4,38 @@ def get_new_value(old_gen, old_automata):
     # TBC - add code to generate the next row of cells,
     # then replace the return statement below to
     # return the updated automata
-    #x = []
-    new_automata = [0] * (SQ_NUM*SQ_NUM)   
-    index = 0
+    
+    new_automata = []
+
+    automata = old_automata.copy()
+
+    for i in range(old_gen + 1):
+        current_row = automata[0:SQ_NUM]
+        
+        new_automata += current_row
+        if i == old_gen:  
+            new_automata += get_row(current_row)
+        del automata[0:SQ_NUM]
+
+    new_automata += automata
+    return new_automata  
+
+def get_row(row):
    
-    for index in range(0, SQ_NUM):
-        accum = 0
-        if index > 0 and old_automata[index - 1] == 1:
-            accum +=1
-        if old_automata[index] == 1:
-            accum +=1
-        if index < (len(old_automata) - 1) and  old_automata[index + 1] == 1:
-            accum +=1
+    new_row = [0] * SQ_NUM
+    for i in range(len(row)):    
+        accum = 0    
+        neighbors = [i - 1, i, i + 1]  
+        for pos in neighbors:
+            try:
+                accum += row[pos]
+            except:
+                accum += 0
+
         if accum > 0 and accum < 3:
-            new_automata[index] = 1
-        else:
-            new_automata[index] = 0
-    return new_automata
+            new_row[i] = 1
+    
+    return new_row
 
 # Define some colors and other constants
 BLACK = (0, 0, 0)
@@ -90,7 +105,7 @@ while not done:
  
     # --- Game logic should go here
     if running:
-        if generations < (SQ_NUM*SQ_NUM):
+        if generations < SQ_NUM:
             generations += 1
             automata = get_new_value(generations-1, automata)
             
